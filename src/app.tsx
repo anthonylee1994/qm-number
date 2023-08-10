@@ -1,6 +1,6 @@
 import React from "react";
 import {NumberCode} from "@/component/NumberCode";
-import {Button, Flex, VStack} from "@chakra-ui/react";
+import {Flex, VStack} from "@chakra-ui/react";
 import {Logo} from "@/component/Logo";
 import {PalaceView} from "@/component/PalaceView";
 import {
@@ -20,6 +20,7 @@ import {
     starTypeMap,
 } from "@/constant";
 import {ExplanationPanel} from "@/component/ExplanationPanel";
+import {RandomButton} from "@/component/RandomButton";
 
 export const App = React.memo(() => {
     const [numberCode, setNumberCode] = React.useState("");
@@ -36,7 +37,8 @@ export const App = React.memo(() => {
         <Flex flexDirection="column" alignItems="center">
             <Logo />
             <NumberCode value={numberCode} setValue={setNumberCode} />
-            {numberCode.length === 6 ? (
+            <RandomButton setNumberCode={setNumberCode} />
+            {numberCode.length === 6 && (
                 <React.Fragment>
                     <PalaceView palace={palace} god={god} star={star} door={door} sky={sky} earth={earth} />
                     <VStack width="full">
@@ -58,20 +60,6 @@ export const App = React.memo(() => {
                         </ExplanationPanel>
                     </VStack>
                 </React.Fragment>
-            ) : (
-                <Button
-                    onClick={() => {
-                        const random = Math.floor(Math.random() * 1000000)
-                            .toString()
-                            .padStart(6, "0");
-                        setNumberCode(random);
-                    }}
-                    colorScheme="red"
-                    w={330}
-                    mb={4}
-                >
-                    亂數產生
-                </Button>
             )}
         </Flex>
     );

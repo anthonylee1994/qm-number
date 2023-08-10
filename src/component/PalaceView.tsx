@@ -36,10 +36,11 @@ export const PalaceView = React.memo<Props>(({palace, god, star, door, sky, eart
 
     return (
         <Flex
-            mb={2}
+            mt={{base: 2, md: 4}}
+            mb={{base: 4, md: 6}}
             borderWidth={6}
             borderColor="yellow.600"
-            w={330}
+            w={340}
             p={4}
             borderRadius="2xl"
             flexDirection="column"
@@ -59,7 +60,7 @@ export const PalaceView = React.memo<Props>(({palace, god, star, door, sky, eart
                 {star || "星空亡"}
             </Text>
             <Text fontWeight="bold" mt={3} fontSize="3xl" color={palace ? palaceColorMap[palace] : "gray.500"}>
-                {palace}
+                {palace || "宮空亡"}
             </Text>
 
             <VStack position="absolute" bottom={5} right={5}>
@@ -73,7 +74,7 @@ export const PalaceView = React.memo<Props>(({palace, god, star, door, sky, eart
 
             <VStack position="absolute" top={5} left={5}>
                 {pattern.split("").map((item, index) => (
-                    <Text key={index} fontWeight="bold" color={BehaviorColor[patternType ?? "平"]} fontSize={40} lineHeight={1}>
+                    <Text key={index} fontWeight="bold" color={BehaviorColor[patternType ?? "平"]} fontSize={32} lineHeight={1}>
                         {item}
                     </Text>
                 ))}
