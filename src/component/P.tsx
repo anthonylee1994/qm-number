@@ -6,5 +6,5 @@ interface Props {
 }
 
 export const P = React.memo<Props>(({children}) => {
-    return <Text _notLast={{mb: 4}}>{children}</Text>;
+    return <Text mb={4}>{children}</Text>;
 });
