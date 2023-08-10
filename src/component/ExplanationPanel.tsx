@@ -17,13 +17,14 @@ export const ExplanationPanel = React.memo<Props>(({type, title, children}) => {
                     {title}
                 </Flex>
                 <Flex
+                    flexDirection="column"
                     fontSize={{base: "md", md: "xl"}}
                     borderBottomRadius={{base: "lg", md: "xl"}}
                     p={{base: 2, md: 3}}
                     bgColor="orange.100"
                     fontWeight="bold"
                     color={BehaviorColor[type ?? "平"]}
-                    justifyContent="center"
+                    alignItems="center"
                 >
                     {children}
                 </Flex>

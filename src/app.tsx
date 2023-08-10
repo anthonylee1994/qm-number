@@ -15,12 +15,14 @@ import {
     heavenlyStemTypeMap,
     palaceExplanationMap,
     palaces,
+    qmPatternMap,
     starExplanationMap,
     stars,
     starTypeMap,
 } from "@/constant";
 import {ExplanationPanel} from "@/component/ExplanationPanel";
 import {RandomButton} from "@/component/RandomButton";
+import {P} from "@/component/P";
 
 export const App = React.memo(() => {
     const [numberCode, setNumberCode] = React.useState("");
@@ -33,6 +35,8 @@ export const App = React.memo(() => {
     const sky = heavenlyStems[skyDigit];
     const earth = heavenlyStems[earthDigit];
 
+    const [, patternType, explaination] = qmPatternMap[`${sky}${earth}`];
+
     return (
         <Flex flexDirection="column" alignItems="center">
             <Logo />
@@ -42,21 +46,28 @@ export const App = React.memo(() => {
                 <React.Fragment>
                     <PalaceView palace={palace} god={god} star={star} door={door} sky={sky} earth={earth} />
                     <VStack width="full">
-                        <ExplanationPanel title="平台環境">{palaceExplanationMap[palace ?? "空亡"]}</ExplanationPanel>
+                        <ExplanationPanel type={patternType} title="格局">
+                            {explaination.map((text, index) => (
+                                <P key={index}>{text}</P>
+                            ))}
+                        </ExplanationPanel>
+                        <ExplanationPanel title="平台環境">
+                            {palace || "宮空亡"}: {palaceExplanationMap[palace ?? "空亡"]}
+                        </ExplanationPanel>
                         <ExplanationPanel type={godTypeMap[god]} title="人格">
-                            {godExplanationMap[god ?? "空亡"]}
+                            {god || "神空亡"}: {godExplanationMap[god ?? "空亡"]}
                         </ExplanationPanel>
                         <ExplanationPanel type={starTypeMap[star]} title="個性">
-                            {starExplanationMap[star ?? "空亡"]}
+                            {star || "星空亡"}: {starExplanationMap[star ?? "空亡"]}
                         </ExplanationPanel>
                         <ExplanationPanel type={doorTypeMap[door]} title="行動">
-                            {doorExplanationMap[door ?? "空亡"]}
+                            {door || "門空亡"}: {doorExplanationMap[door ?? "空亡"]}
                         </ExplanationPanel>
                         <ExplanationPanel type={heavenlyStemTypeMap[sky]} title="外表">
-                            {heavenlyStemExplanationMap[sky]}
+                            {sky}: {heavenlyStemExplanationMap[sky]}
                         </ExplanationPanel>
                         <ExplanationPanel type={heavenlyStemTypeMap[earth]} title="內心">
-                            {heavenlyStemExplanationMap[earth]}
+                            {earth}: {heavenlyStemExplanationMap[earth]}
                         </ExplanationPanel>
                     </VStack>
                 </React.Fragment>
