@@ -34,9 +34,6 @@ export const App = React.memo(() => {
     const door = doors[doorDigit - 1];
     const sky = heavenlyStems[skyDigit];
     const earth = heavenlyStems[earthDigit];
-
-    const [, patternType, explaination] = qmPatternMap[`${sky}${earth}`];
-
     return (
         <Flex flexDirection="column" alignItems="center">
             <Logo />
@@ -46,8 +43,8 @@ export const App = React.memo(() => {
                 <React.Fragment>
                     <PalaceView palace={palace} god={god} star={star} door={door} sky={sky} earth={earth} />
                     <VStack width="full">
-                        <ExplanationPanel type={patternType} title="格局">
-                            {explaination.map((text, index) => (
+                        <ExplanationPanel type={qmPatternMap[`${sky}${earth}`][1]} title="格局">
+                            {qmPatternMap[`${sky}${earth}`][2].map((text, index) => (
                                 <P key={index}>{text}</P>
                             ))}
                         </ExplanationPanel>
